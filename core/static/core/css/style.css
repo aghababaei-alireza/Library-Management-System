@@ -1,0 +1,19 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    background-color: #2D394B;
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+}
+
+.header-top-bar {
+    grid-column: 1;
+}
+
+.search-bar {
+    grid-column: 2;
+    background-color: #C8C8C8;
+}

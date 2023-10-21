@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static "core/css/style.css" %}">
+    <title>Library | {% block title %}{% endblock title %}</title>
+</head>
+<body>
+    <header class="header">
+        <div class="header-top-bar">
+            <img src="{% static "core/img/logo.png" %}" alt="LOGO" width="100px" height="auto">
+            <div class="search-bar">
+                
+            </div>
+        </div>
+    </header>
+    {% block content %}{% endblock content %}
+</body>
+</html>
