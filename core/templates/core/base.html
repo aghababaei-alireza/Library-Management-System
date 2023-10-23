@@ -9,12 +9,28 @@
 </head>
 <body>
     <header class="header">
-        <div class="header-top-bar">
-            <img src="{% static "core/img/logo.png" %}" alt="LOGO" width="100px" height="auto">
-            <div class="search-bar">
-                
+        <div class="header-bar">
+            <img src="" alt="LOGO">
+            <form action="" method="post">
+                <button type="submit">Search</button>
+                <input type="search" name="q" placeholder="Search...">
+            </form>
+            <div class="account-btn-area">
+                <a href="#">Sign Up</a>
+                <a href="#">Log In</a>
+                <a href="#">Log Out</a>
+                <a href="#">Dashboard</a>
             </div>
         </div>
+        <nav class="navbar">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Categories</a></li>
+                <li><a href="#">Top Books</a></li>
+                <li><a href="#">Search</a></li>
+            </ul>
+        </nav>
+        <hr>
     </header>
     {% block content %}{% endblock content %}
 </body>
