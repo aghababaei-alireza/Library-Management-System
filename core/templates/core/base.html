@@ -10,16 +10,20 @@
 <body>
     <header class="header">
         <div class="header-bar">
-            <img src="" alt="LOGO">
+            <img src="{% static "core/img/logo.png" %}" alt="LOGO" height="50px" width="auto">
             <form action="" method="post">
+                {% csrf_token %}
                 <button type="submit">Search</button>
                 <input type="search" name="q" placeholder="Search...">
             </form>
             <div class="account-btn-area">
+                {% if not request.user.is_authenticated %}
                 <a href="#">Sign Up</a>
                 <a href="#">Log In</a>
+                {% else %}
                 <a href="#">Log Out</a>
                 <a href="#">Dashboard</a>
+                {% endif %}
             </div>
         </div>
         <nav class="navbar">
