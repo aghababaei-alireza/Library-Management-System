@@ -1,41 +1,61 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static "core/css/style.css" %}">
-    <title>Library | {% block title %}{% endblock title %}</title>
-</head>
-<body>
-    <header class="header">
-        <div class="header-bar">
-            <img src="{% static "core/img/logo.png" %}" alt="LOGO" height="50px" width="auto">
-            <form action="" method="post">
-                {% csrf_token %}
-                <button type="submit">Search</button>
-                <input type="search" name="q" placeholder="Search...">
-            </form>
-            <div class="account-btn-area">
-                {% if not request.user.is_authenticated %}
-                <a href="#">Sign Up</a>
-                <a href="#">Log In</a>
-                {% else %}
-                <a href="#">Log Out</a>
-                <a href="#">Dashboard</a>
-                {% endif %}
-            </div>
-        </div>
-        <nav class="navbar">
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Categories</a></li>
-                <li><a href="#">Top Books</a></li>
-                <li><a href="#">Search</a></li>
-            </ul>
-        </nav>
-        <hr>
-    </header>
-    {% block content %}{% endblock content %}
-</body>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="{% static "core/css/style.css" %}">
+		<title>Library | {% block title %}{% endblock title %}</title>
+	</head>
+	<body>
+		<header class="header">
+			<div class="header-bar">
+				<a href="/"><img src="{% static "core/img/logo.png" %}" alt="LOGO" height="50px" width="auto"></a>
+				<form action="." method="post">
+					{% csrf_token %}
+					<button type="submit">Search</button>
+					<input type="search" name="q" placeholder="Search..." />
+				</form>
+				<div class="account-btn-area">
+					{% if not request.user.is_authenticated %}
+					<a href="#">Sign Up</a>
+					<a href="#">Log In</a>
+					{% else %}
+					<a href="#">Log Out</a>
+					<a href="#">Dashboard</a>
+					{% endif %}
+				</div>
+			</div>
+			<nav class="navbar">
+				<a href="#">Home</a>
+				<a href="#">Categories</a>
+				<a href="#">Top Books</a>
+				<a href="#">Search</a>
+			</nav>
+		</header>
+
+		{% block content %}{% endblock content %}
+
+		<footer class="footer">
+			<div class="footer-about">
+				<h3>Library</h3>
+				<br />
+				<p>{% lorem 1 b %}</p>
+			</div>
+			<div class="footer-contact">
+				<h3>Get In Touch</h3>
+				<br />
+				<a href="#">&#9742; 031-12345678</a>
+				<a href="#">&#9993; info@library.com</a>
+				<a href="#">&#9906; Isfahan, Iran.</a>
+			</div>
+			<div class="footer-links">
+				<h3>Useful Links</h3>
+				<br />
+				<a href="#">Home</a>
+				<a href="#">Categories</a>
+				<a href="#">Top Books</a>
+			</div>
+		</footer>
+	</body>
 </html>
