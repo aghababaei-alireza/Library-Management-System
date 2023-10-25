@@ -100,13 +100,14 @@
     background-color: #2D3E50;
 }
 
-.footer{
+.footer {
     background-color: #2D3E50;
     display: grid;
     grid-template-columns: 2fr 1fr 1fr;
     gap: 40px;
     color: #fff;
     padding: 30px;
+
     >div>h3 {
         text-decoration: underline;
     }
@@ -121,16 +122,78 @@
     color: #fff;
 }
 
-.footer a:hover{
+.footer a:hover {
     color: hsl(120, 100%, 25%);
 }
 
 .footer-contact {
     display: flex;
     flex-direction: column;
+    gap: 10px;
 }
 
 .footer-links {
     display: flex;
     flex-direction: column;
+    gap: 10px;
+}
+
+main {
+    background-color: #ddd;
+    padding: 30px;
+}
+
+.home-section-title {
+    display: flex;
+    justify-content: space-between;
+    color: #2D3E50;
+}
+
+.home-section-title a:where(:link, :visited) {
+    text-decoration: none;
+    color: #2D3E50;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.home-section-title a:hover {
+    color: #fff;
+    background-color: hsl(120, 100%, 25%);
+}
+
+.home-section-title a::after {
+    content: " ⮞";
+}
+
+.home-section-content {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding-top: 10px;
+}
+
+.home-section-content a:where(:link, :visited) {
+    text-decoration: none;
+}
+
+.card {
+    background-color: #eee;
+    color: #2D3E50;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.category {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+}
+
+p.count {
+    background-color: #2D3E50;
+    color: #fff;
+    border-radius: inherit;
+    padding: 3px;
 }

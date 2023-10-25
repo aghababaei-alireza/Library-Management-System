@@ -1,0 +1,25 @@
+{% extends "core/base.html" %}
+{% block title %}
+    Home
+{% endblock title %}
+{% block content %}
+    <main>
+        <div class="home-section">
+            <div class="home-section-title">
+                <h2>Categories</h2>
+                <a href="#">See All</a>
+            </div>
+            <hr>
+            <div class="home-section-content">
+                {% for category in categories %}
+                    <a href="#">
+                        <div class="card category">
+                            <p>{{ category.name }}</p>
+                            <p class="count">23</p>
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+    </main>
+{% endblock content %}
