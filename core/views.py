@@ -1,19 +1,32 @@
 from django.shortcuts import render
-from .models import Category
+from .models import Category, Book, Person, Publisher
 
 
 def home(request):
-    categories = [Category(name='Fantasy', description='Fantasy encompasses a huge part of the book world. It’s one of the most popular book genres out there—a personal favorite of mine to read and write.'),
-                  Category(
-                      name='Adventure', description='Writing a novel in the adventure category will require a trip, journey, or quest of some kind as the overall plot.'),
-                  Category(
-                      name='Contemporary', description='This book genre is among the most popular, though most writers aren’t sure of what this category even is.'),
-                  Category(
-                      name='Mystery', description='We’ve all heard of the mystery book genres. It’s an extremely popular genre, and for a good reason.'),
-                  Category(
-                      name='Horror', description='Horror novels are characterized by the fact that the main plot revolves around something scary and terrifying.'),
-                  Category(name='Romance', description='Romance authors have one specific goal when it comes to their books: to make you fall in love with the characters just as much as the characters fall in love with each other.')]
+    categories = Category.objects.all().order_by('name')[:10]
+    books = Book.objects.all()[:10]
+
+    num_categories = Category.objects.all().count()
+    num_books = Book.objects.all().count()
+    num_authors = Person.objects.all().count()
+    num_publishers = Publisher.objects.all().count()
+
     context = {
-        'categories': categories
+        'stat': {
+            'categories': num_categories,
+            'books': num_books,
+            'authors': num_authors,
+            'publishers': num_publishers
+        },
+        'categories': categories,
+        'books': books
     }
     return render(request, 'core/home.html', context)
+
+
+def book(request, pk):
+    book = Book.objects.get(pk=pk)
+    context = {
+        'book': book
+    }
+    return render(request, 'core/book.html', context)

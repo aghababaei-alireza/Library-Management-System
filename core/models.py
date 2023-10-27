@@ -40,6 +40,10 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+    @property
+    def num_books(self):
+        return self.books.count()
+
     class Meta:
         verbose_name_plural = "Categories"
 
@@ -70,6 +74,10 @@ class Book(models.Model):
 
     def __str__(self):
         return self.title
+
+    @property
+    def authors_names(self):
+        return ', '.join(a.full_name for a in self.authors.all())
 
 
 class BookCopy(models.Model):

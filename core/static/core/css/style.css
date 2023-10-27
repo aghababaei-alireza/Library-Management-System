@@ -143,6 +143,31 @@ main {
     padding: 30px;
 }
 
+.home-stat-section {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+}
+
+.home-stat-section .card {
+    background-color: hsl(120, 100%, 25%);
+    color: #2D3E50;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    padding: 20px;
+    min-width: 150px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.home-section {
+    margin-bottom: 20px;
+}
+
 .home-section-title {
     display: flex;
     justify-content: space-between;
@@ -196,4 +221,31 @@ p.count {
     color: #fff;
     border-radius: inherit;
     padding: 3px;
+}
+
+.book {
+    text-align: center;
+    color: #2D3E50;
+}
+
+.book a:where(:link, :visited) {
+    text-decoration: none;
+    color: #2D3E50;
+}
+
+.book-detail {
+    padding-top: 15px;
+    text-align: justify;
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 10px;
+
+}
+
+.book-detail-title {
+    color: #555;
+}
+
+.book-detail-value {
+    color: #2D3E50;
 }

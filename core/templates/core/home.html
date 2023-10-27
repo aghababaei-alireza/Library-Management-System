@@ -1,25 +1,76 @@
 {% extends "core/base.html" %}
-{% block title %}
-    Home
-{% endblock title %}
+
+{% load static %}
+
+{% block title %} Home {% endblock title %}
+
 {% block content %}
-    <main>
-        <div class="home-section">
-            <div class="home-section-title">
-                <h2>Categories</h2>
-                <a href="#">See All</a>
-            </div>
-            <hr>
-            <div class="home-section-content">
-                {% for category in categories %}
-                    <a href="#">
-                        <div class="card category">
-                            <p>{{ category.name }}</p>
-                            <p class="count">23</p>
-                        </div>
-                    </a>
-                {% endfor %}
-            </div>
-        </div>
-    </main>
+<main>
+	<div class="home-stat-section">
+		<div class="card">
+			<h2>Books</h2>
+			<h3>{{ stat.books }}</h3>
+		</div>
+		<div class="card">
+			<h2>Categories</h2>
+			<h3>{{ stat.categories }}</h3>
+		</div>
+		<div class="card">
+			<h2>Authors</h2>
+			<h3>{{ stat.authors }}</h3>
+		</div>
+		<div class="card">
+			<h2>Publishers</h2>
+			<h3>{{ stat.publishers }}</h3>
+		</div>
+	</div>
+
+	<div class="home-section">
+		<div class="home-section-title">
+			<h2>Categories</h2>
+			<a href="#">See All</a>
+		</div>
+		<hr>
+		<div class="home-section-content">
+			{% for category in categories %}
+			<a href="#">
+				<div class="card category">
+					<p>{{ category.name }}</p>
+					<p class="count">{{ category.num_books }}</p>
+					<!--TODO: Book count-->
+				</div>
+			</a>
+			{% endfor %}
+		</div>
+	</div>
+
+	<div class="home-section">
+		<div class="home-section-title">
+			<h2>Top Books</h2>
+			<a href="#">See All</a>
+		</div>
+		<hr>
+		<div class="home-section-content">
+			{% for book in books %}
+			
+				<div class="card book">
+					<a href="#">
+					<img src="{{ book.image.url }}" alt="Book" height="100px" width="auto">
+					<p>{{ book.title }}</p>
+					</a>
+					<hr>
+					<div class="book-detail">
+						<span class="book-detail-title">Author(s):</span>
+						<a href="#"><span class="book-detail-value">{{ book.authors_names }}</span></a>
+						<span class="book-detail-title">Publisher:</span>
+						<a href="#"><span class="book-detail-value">{{ book.publisher.name }}</span></a>
+						<span class="book-detail-title">Status:</span>
+						<span class="book-detail-value">Available</span>
+					</div>
+				</div>
+			
+			{% endfor %}
+		</div>
+	</div>
+</main>
 {% endblock content %}
