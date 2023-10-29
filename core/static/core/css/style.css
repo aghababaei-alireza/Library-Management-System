@@ -1,6 +1,11 @@
 * {
     margin: 0;
     padding: 0;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+a:where(:link, :visited) {
+    text-decoration: none;
 }
 
 .header {
@@ -105,12 +110,16 @@
     display: grid;
     grid-template-columns: 2fr 1fr 1fr;
     gap: 40px;
-    color: #fff;
+
     padding: 30px;
 
     >div>h3 {
         text-decoration: underline;
     }
+}
+
+.footer :where(p, h3) {
+    color: #fff;
 }
 
 .footer-about {

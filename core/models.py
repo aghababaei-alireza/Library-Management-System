@@ -79,6 +79,10 @@ class Book(models.Model):
     def authors_names(self):
         return ', '.join(a.full_name for a in self.authors.all())
 
+    @property
+    def translators_names(self):
+        return ', '.join(a.full_name for a in self.translators.all())
+
 
 class BookCopy(models.Model):
     book = models.ForeignKey(Book, related_name="copies",
@@ -88,15 +92,19 @@ class BookCopy(models.Model):
     def __str__(self):
         return f"{self.book.title}-[{self.serial}]"
 
+    @property
+    def not_returned_checkouts(self):
+        return self.checkouts.filter(is_returned=False)
+
     class Meta:
         verbose_name_plural = "BookCopies"
 
 
 class Reserve(models.Model):
     book_copy = models.ForeignKey(
-        BookCopy, related_name="reseved", verbose_name="Book Copy", on_delete=models.CASCADE)
+        BookCopy, related_name="reserves", verbose_name="Book Copy", on_delete=models.CASCADE)
     user = models.ForeignKey(
-        User, related_name="reserved", verbose_name="User", on_delete=models.CASCADE)
+        User, related_name="reserves", verbose_name="User", on_delete=models.CASCADE)
     reserve_time = models.DateField(
         auto_now=True, verbose_name="Time Reserved")
 
@@ -106,9 +114,9 @@ class Reserve(models.Model):
 
 class Checkout(models.Model):
     book_copy = models.ForeignKey(
-        BookCopy, related_name="checked_out", verbose_name="Book Copy", on_delete=models.CASCADE)
+        BookCopy, related_name="checkouts", verbose_name="Book Copy", on_delete=models.CASCADE)
     user = models.ForeignKey(
-        User, related_name="checked_out", verbose_name="User", on_delete=models.CASCADE)
+        User, related_name="checkouts", verbose_name="User", on_delete=models.CASCADE)
     start_date = models.DateField(
         verbose_name="Start Date", auto_now_add=True)
     expected_return_date = models.DateField(

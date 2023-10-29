@@ -1,0 +1,68 @@
+.book-info-section {
+    display: grid;
+    grid-template-columns: 1fr 3fr 2fr;
+    gap: 30px;
+}
+
+.book-description {
+    text-align: justify;
+}
+
+.book-image img {
+    box-shadow: 5px 5px 20px #2D3E50;
+}
+
+.book-info {
+    color: #2D3E50;
+}
+
+.book-info-title {
+    color: #4e6a88;
+}
+
+.book-info-value a:where(:link, :visited) {
+    color: #2D3E50;
+    text-decoration: none;
+}
+
+.book-category-list {
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+}
+
+.book-category-list .card:hover {
+    background-color: hsl(120, 100%, 25%);
+    color: #fff;
+}
+
+.book-copies-section {
+    color: #2D3E50;
+}
+
+.book-copies-table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.book-copies-table :is(td, th) {
+    border: 1px solid black;
+    padding: 10px;
+    text-align: center;
+}
+
+.column-expand {
+    width: 100%;
+}
+
+a.checkout-btn:where(:link, :visited) {
+    background-color: hsl(120, 100%, 25%);
+    color: #fff;
+    text-decoration: none;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+a.checkout-btn:hover {
+    background-color: hsla(120, 100%, 25%, 0.8);
+}

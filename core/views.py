@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from .models import Category, Book, Person, Publisher
+from .models import Category, Book, Person, Publisher, BookCopy
+from django.db.models import Q
 
 
 def home(request):
@@ -26,7 +27,13 @@ def home(request):
 
 def book(request, pk):
     book = Book.objects.get(pk=pk)
+    book_copies = BookCopy.objects.filter(book=book)
+    related_books = Book.objects.filter(
+        (Q(authors__in=book.authors.all()) | Q(categories__in=book.categories.all())) & ~Q(id=book.id))[:10]
+
     context = {
-        'book': book
+        'book': book,
+        'book_copies': book_copies,
+        'related_books': related_books
     }
     return render(request, 'core/book.html', context)

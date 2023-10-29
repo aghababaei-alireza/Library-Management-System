@@ -37,7 +37,6 @@
 				<div class="card category">
 					<p>{{ category.name }}</p>
 					<p class="count">{{ category.num_books }}</p>
-					<!--TODO: Book count-->
 				</div>
 			</a>
 			{% endfor %}
@@ -54,7 +53,7 @@
 			{% for book in books %}
 			
 				<div class="card book">
-					<a href="#">
+					<a href="{% url "book" book.id %}">
 					<img src="{{ book.image.url }}" alt="Book" height="100px" width="auto">
 					<p>{{ book.title }}</p>
 					</a>

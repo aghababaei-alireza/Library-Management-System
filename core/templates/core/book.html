@@ -2,6 +2,124 @@
 
 {% block title %}{{ book.title }}{% endblock title %}
 
-{% block content %}
+{% load static %}
 
+{% block content %}
+<main>
+    <div class="book-info-section">
+        <div class="book-image">
+            <img src="{{ book.image.url }}" alt="Book" width="200px" height="auto">
+        </div>
+        <div class="book-info">
+            <h2>{{ book.title }}</h2>
+            <hr><br>
+            <p class="book-description">{{ book.description }}</p><br>
+            <span class="book-info-title">Author(s):</span>
+            <span class="book-info-value"><a href="#">{{ book.authors_names }}</a></span><br><br>
+            {% if book.translators_names %}
+            <span class="book-info-title">Translator(s):</span>
+            <span class="book-info-value"><a href="#">{{ book.authors_names }}</a></span><br><br>
+            {% endif %}
+            <span class="book-info-title">Publisher:</span>
+            <span class="book-info-value"><a href="">{{ book.publisher.name }}</a></span><br><br>
+            <span class="book-info-title">Published In:</span>
+            <span class="book-info-value">{{ book.year }}</span><br><br>
+            {% if book.isbn10 %}
+            <span class="book-info-title">ISBN(10):</span>
+            <span class="book-info-value">{{ book.isbn10 }}</span><br><br>
+            {% endif %}
+            {% if book.isbn13 %}
+            <span class="book-info-title">ISBN(13):</span>
+            <span class="book-info-value">{{ book.isbn13 }}</span><br><br>
+            {% endif %}
+            {% if book.num_pages %}
+            <span class="book-info-title">Number of Pages:</span>
+            <span class="book-info-value">{{ book.num_pages }}</span><br><br>
+            {% endif %}
+            {% if book.edition %}
+            <span class="book-info-title">Edition:</span>
+            <span class="book-info-value">{{ book.edition }}</span><br><br>
+            {% endif %}
+            <span class="book-info-title">Categories:</span><br><br>
+            <div class="book-category-list">
+                {% for category in book.categories.all %}
+                <a href="#">
+                    <div class="card">
+                        <span>{{ category.name }}</span>
+                    </div>
+			    </a>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="book-copies-section">
+            <h3>Book copies:</h3><br>
+            <table class="book-copies-table">
+                <tr>
+                    <th>Serial</th>
+                    <th>Status</th>
+                    <th class="column-expand">Action</th>
+                </tr>
+                {% for bc in book_copies %}
+                <tr>
+                    <td>{{ bc.serial }}</td>
+                    {% if bc.not_returned_checkouts %}
+                        {% if bc.reserves.count %}
+                        <td>Checked-out <br> and <br> Reserved</td>
+                        <td>---</td>
+                        {% else %}
+                        <td>Checked-out</td>
+                        <td><a class="checkout-btn" href="#">Reserve</a></td>
+                        {% endif %}
+                    {% elif bc.reserves.count %}
+                    <td>Reserved</td>
+                    <td>---</td>
+                    {% else %}
+                    <td>Available</td>
+                    <td>
+                        {% if request.user.is_staff %}
+                        <a class="checkout-btn" href="#">Check out</a>
+                        {% endif %}
+                        <a class="checkout-btn" href="#">Reserve</a>
+                    </td>
+                    {% endif %}
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="3">Not In Library</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    <br><br><br>
+
+    <div class="home-section">
+		<div class="home-section-title">
+			<h2>Related Books</h2>
+			<a href="#">See All</a>
+		</div>
+		<hr>
+		<div class="home-section-content">
+			{% for book in related_books %}
+			
+				<div class="card book">
+					<a href="{% url "book" book.id %}">
+					<img src="{{ book.image.url }}" alt="Book" height="100px" width="auto">
+					<p>{{ book.title }}</p>
+					</a>
+					<hr>
+					<div class="book-detail">
+						<span class="book-detail-title">Author(s):</span>
+						<a href="#"><span class="book-detail-value">{{ book.authors_names }}</span></a>
+						<span class="book-detail-title">Publisher:</span>
+						<a href="#"><span class="book-detail-value">{{ book.publisher.name }}</span></a>
+						<span class="book-detail-title">Status:</span>
+						<span class="book-detail-value">Available</span>
+					</div>
+				</div>
+			
+			{% endfor %}
+		</div>
+	</div>
+</main>
 {% endblock content %}
